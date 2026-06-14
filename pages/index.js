@@ -122,7 +122,7 @@ export default function Home() {
             <span>PRA FUMAR.</span>
           </h1>
 
-          <p className="hero-sub">Sem nicotina. Com terpenos e sinergia com a flor.</p>
+          <p className="hero-sub">Sem nicotina. Com terpenos e sinergia com a flor. Trazido de onde a paz reina por Negs710</p>
 
           <a href="#comparativo" className="scroll-hint" aria-label="Rolar para conteúdo">
             ↓ entende por quê antes de pegar sua amostra ↓
@@ -229,15 +229,18 @@ export default function Home() {
 
         <section id="sinergia">
           <p className="section-label">A combinação</p>
-          <h2>Sinergia com a flor</h2>
+          <h2>Sinergia com Flor, Extrações e até o Pren</h2>
 
           <div className="sinergia-block">
-            <h3>🌸 Por que misturar?</h3>
+            <h3>🌸🧊 Por que misturar?</h3>
             <p className="sinergia-text">Lúpulo e cannabis são da mesma família botânica (Cannabaceae) e compartilham terpenos. Quando misturados:</p>
             <ul className="sinergia-list">
               <li>Gosto da flor fica mais forte e dura mais na boca</li>
+              <li>O GOSTO DO ICE/HASH FICA MAIS PURO</li>
+              <li>Sua Ganja irá render mais</li>
               <li>Efeito entourage amplificado por terpenos complementares</li>
-              <li>Queima mais uniforme e lenta</li>
+              <li>Melhora do sono - seda muito bem pra quem tem insônia </li>
+              <li>Melhora sabor e qualidade desde o pior prensado até o melhor colombinha</li>
               <li>Sem nicotina suprimindo o THC</li>
               <li>Volume maior sem perder qualidade da experiência</li>
             </ul>
