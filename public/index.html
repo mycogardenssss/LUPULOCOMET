@@ -705,21 +705,36 @@
       };
 
       try {
-        var res  = await fetch('/api/salvar', {
+        var apiUrl = window.location.origin + '/api/salvar';
+        var res    = await fetch(apiUrl, {
           method:  'POST',
           headers: { 'Content-Type': 'application/json' },
           body:    JSON.stringify(payload)
         });
+
+        if (!res.ok) {
+          var errorText = res.statusText;
+          try {
+            var errorBody = await res.text();
+            errorText = errorBody || errorText;
+          } catch (parseError) {
+            console.error('Erro ao ler resposta de erro:', parseError);
+          }
+          showMsg('Erro de servidor: ' + res.status + ' — ' + errorText, 'error');
+          return;
+        }
+
         var data = await res.json();
-        if (res.ok && data.success) {
+        if (data && data.success) {
           showMsg('Show! Recebi seu Instagram e já te chamamos 🌿', 'success');
           nome.value = '';
           telefone.value = '';
           instagram.value = '';
         } else {
-          showMsg(data.error || 'Algo deu errado, tenta de novo.', 'error');
+          showMsg((data && data.error) || 'Algo deu errado, tenta de novo.', 'error');
         }
       } catch(e) {
+        console.error('Fetch error:', e);
         showMsg('Sem conexão. Tenta de novo em alguns segundos.', 'error');
       } finally {
         setLoading(false);
