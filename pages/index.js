@@ -54,56 +54,41 @@ export default function Home() {
       instagram: instagram.trim(),
     };
 
-    const apiUrls = ['api/salvar', 'salvar'];
-    let res = null;
-    let lastErrorText = '';
+    try {
+      const res = await fetch('/api/salvar', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
 
-    for (let i = 0; i < apiUrls.length; i += 1) {
-      try {
-        res = await fetch(apiUrls[i], {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(payload),
-        });
-      } catch (fetchError) {
-        lastErrorText = fetchError.message;
-        continue;
-      }
-
-      if (res.status === 404) {
-        lastErrorText = '404 route not found: ' + apiUrls[i];
-        continue;
-      }
-
-      break;
-    }
-
-    if (!res || !res.ok) {
-      let errorText = lastErrorText || (res ? res.statusText : 'Erro de servidor');
-      if (res) {
+      if (!res.ok) {
+        let errorText = res.statusText || 'Erro de servidor';
         try {
-          const errorBody = await res.text();
-          if (errorBody) errorText = errorBody;
-        } catch (parseError) {
-          console.error('Erro ao ler resposta de erro:', parseError);
+          const body = await res.text();
+          if (body) errorText = body;
+        } catch (e) {
+          console.error('Erro ao ler corpo de erro:', e);
         }
+        setMessage({ text: `Erro de servidor: ${res.status} — ${errorText}`, type: 'error' });
+        setLoading(false);
+        return;
       }
-      setMessage({ text: `Erro de servidor: ${res ? res.status : ''} — ${errorText}`, type: 'error' });
+
+      const data = await res.json();
+      if (data && data.success) {
+        setMessage({ text: 'Show! Recebi seu Instagram e já te chamamos 🌿', type: 'success' });
+        setNome('');
+        setTelefone('');
+        setInstagram('');
+      } else {
+        setMessage({ text: (data && data.error) || 'Algo deu errado, tenta de novo.', type: 'error' });
+      }
+    } catch (e) {
+      console.error('Fetch error:', e);
+      setMessage({ text: 'Sem conexão. Tenta de novo em alguns segundos.', type: 'error' });
+    } finally {
       setLoading(false);
-      return;
     }
-
-    const data = await res.json();
-    if (data && data.success) {
-      setMessage({ text: 'Show! Recebi seu Instagram e já te chamamos 🌿', type: 'success' });
-      setNome('');
-      setTelefone('');
-      setInstagram('');
-    } else {
-      setMessage({ text: (data && data.error) || 'Algo deu errado, tenta de novo.', type: 'error' });
-    }
-
-    setLoading(false);
   };
 
   return (
