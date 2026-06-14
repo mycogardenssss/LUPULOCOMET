@@ -115,7 +115,7 @@ export default function Home() {
             <line x1="36" y1="14" x2="46" y2="6" stroke="#D4AF37" strokeWidth="1.5" strokeLinecap="round" />
           </svg>
 
-          <div className="event-tag">trap & afins: anomaly</div>
+          <div className="event-tag">negs710 x trap & afins: anomaly</div>
 
           <h1>
             LÚPULO<br />
