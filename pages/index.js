@@ -122,7 +122,7 @@ export default function Home() {
             <span>PRA FUMAR.</span>
           </h1>
 
-          <p className="hero-sub">Sem nicotina. Com terpenos e sinergia com a flor. Trazido de onde a paz reina por Negs710</p>
+          <p className="hero-sub">Sem nicotina. Com terpenos e sinergia com a flor. Trazido de onde a paz reina por Negs710 e El King.</p>
 
           <a href="#comparativo" className="scroll-hint" aria-label="Rolar para conteúdo">
             ↓ entende por quê antes de pegar sua amostra ↓
